@@ -3,20 +3,25 @@ const fs = require("fs");
 const client = new Discord.Client();
 const images = JSON.parse(fs.readFileSync("./pokemonrefs.json", "utf8"));
 
-var interval = 5000;
+var interval;
 var spamid = [];
 var infoid = [];
+var curr = 0;
+var testchannel = "436971996736258049";
 
 /*function step() {
-    var index;
-    for (index = 0; index < spamid.length; ++index) {
-        client.channels.get(spamid[index]).send('spamming here');
+    if (spamid.length > 0) {
+        if (curr >= spamid.lenght) {
+            curr = 0;
+        }
+        client.channels.get(spamid[curr]).send('spamming here');
+        curr = curr + 1;
     }
 };*/
 
 client.on('ready', () => {
     console.log('I am ready!');
-    //setTimeout(step, interval);
+    //timer = setTimeout(step, interval);
 });
 
 client.on('message', message => {
@@ -31,12 +36,15 @@ client.on('message', message => {
         }
         message.channel.send('spam enabled');
         
-        setInterval(function() {
-            var index;
-            for (index = 0; index < spamid.length; ++index) {
-                client.channels.get(spamid[index]).send('spamming here');
-            }            
-        }, 5000);
+        clearInterval(interval);
+        interval = setInterval(function() {
+            if (spamid[curr] === undefined) {
+                curr = 0;
+            }
+            //client.channels.get(testchannel).send('spamming into ' + spamid[curr]);
+            client.channels.get(spamid[curr]).send('spamming here');
+            curr++;
+        }, 3000);
     }
     
     if (message.content === '$stop-red') {
@@ -46,15 +54,16 @@ client.on('message', message => {
         }
         message.channel.send('spam disabled');
         
-        if (spamid.length < 1) {
-            clearInterval(interval);
-        } else {
-            setInterval(function() {
-                var index;
-                for (index = 0; index < spamid.length; ++index) {
-                    client.channels.get(spamid[index]).send('spamming here');
-                }            
-            }, 5000);
+        clearInterval(interval);
+        if (spamid.length > 0) {
+            interval = setInterval(function() {
+                if (spamid[curr] === undefined) {
+                    curr = 0;
+                }
+                //client.channels.get(testchannel).send('spamming into ' + spamid[curr]);
+                client.channels.get(spamid[curr]).send('spamming here');
+                curr++;
+            }, 3000);
         }
     }
     
