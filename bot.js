@@ -25,7 +25,7 @@ client.on('message', message => {
     	message.reply('pong');
     }
     
-    if (message.content === '$spam') { 
+    if (message.content === '$spam-red') { 
         if (spamid.indexOf(message.channel.id) < 0) {
             spamid.push(message.channel.id);
         }
@@ -39,7 +39,7 @@ client.on('message', message => {
         }, 5000);
     }
     
-    if (message.content === '$stop') {
+    if (message.content === '$stop-red') {
         var index = spamid.indexOf(message.channel.id);
         if (index > -1) {
           spamid.splice(index, 1);
@@ -58,11 +58,11 @@ client.on('message', message => {
         }
     }
     
-    if (message.content === '$spamchannels') { 
+    if (message.content === '$spamchannels-red') { 
         message.channel.send('spam channels: ' + spamid.join(' '));
     }
 
-    if (message.content === '$info') {
+    /*if (message.content === '$info') {
         var index = infoid.indexOf(message.channel.id);
         if (index > -1) {
             infoid.splice(index, 1);
@@ -89,7 +89,7 @@ client.on('message', message => {
                     message.channel.send('A wild ' + realname + ' has appeared');
             }
         }
-    }
+    }*/
     
 });
 
