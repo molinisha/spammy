@@ -62,7 +62,7 @@ client.on('message', message => {
         message.channel.send('spam channels: ' + spamid.join(' '));
     }
 
-    /*if (message.content === '$info') {
+    if (message.content === '$info-red') {
         var index = infoid.indexOf(message.channel.id);
         if (index > -1) {
             infoid.splice(index, 1);
@@ -73,7 +73,7 @@ client.on('message', message => {
         }
     }
 
-    if (message.content === '$infochannels') { 
+    if (message.content === '$infochannels-red') { 
         message.channel.send('spawns info channels: ' + infoid.join(' '));
     }
 
@@ -89,7 +89,7 @@ client.on('message', message => {
                     message.channel.send('A wild ' + realname + ' has appeared');
             }
         }
-    }*/
+    }
     
 });
 
