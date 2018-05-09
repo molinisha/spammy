@@ -26,9 +26,9 @@ client.on('ready', () => {
 
 client.on('message', message => {
     
-    if (message.content === '$ping') {
+    /*if (message.content === '$ping') {
     	message.reply('pong');
-    }
+    }*/
     
     if (message.content === '$spam-red') { 
         if (spamid.indexOf(message.channel.id) < 0) {
